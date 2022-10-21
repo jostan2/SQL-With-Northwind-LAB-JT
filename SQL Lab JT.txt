@@ -1,0 +1,74 @@
+--1) select all rows of the "Customers" table
+select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax from [NORTHWND].[dbo].[Customers];
+
+--2) Get Distict Countries from the Customers table
+select Country from [NORTHWND].[dbo].[Customers];
+
+--3) Get all the rows from the table Customers where the Customer’s ID starts with “BL”.
+select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax from [NORTHWND].[dbo].[Customers]
+where CustomerID LIKE 'BL%';
+
+--4)Get the first 100 records of the orders table. DISCUSS: Why would you do this? What else would you likely need to include in this query?
+	--you may want to do this in order to shorten loading time, especially if you don't want to display an entire database of thousands or millions.
+	--showing only the first 100 will help processing time be quicker.
+select top(100) [OrderID]
+      ,[CustomerID]
+      ,[EmployeeID]
+      ,[OrderDate]
+      ,[RequiredDate]
+      ,[ShippedDate]
+      ,[ShipVia]
+      ,[Freight]
+      ,[ShipName]
+      ,[ShipAddress]
+      ,[ShipCity]
+      ,[ShipRegion]
+      ,[ShipPostalCode]
+      ,[ShipCountry]
+	  from [NORTHWND].[dbo].[Orders];
+
+--5) Get all customers that live in the postal codes 1010, 3012, 12209, and 05023.
+select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax from [NORTHWND].[dbo].[Customers]
+where PostalCode = '1010' or
+PostalCode ='3012'or
+PostalCode ='12209' or
+PostalCode ='05023';
+
+--6) Get all orders where the ShipRegion is not equal to NULL.
+select[ShipRegion] from [NORTHWND].[dbo].[Orders]
+where [ShipRegion] is not null;
+
+--7)Get all customers ordered by the country, then by the city.
+select [CustomerID], [Country], [City] from [NORTHWND].[dbo].[Customers]
+order by [Country] asc, [City];
+
+--8) Add a new customer to the customers table. You can use whatever values.
+Insert into [NORTHWND].[dbo].[Customers]
+values('QLGEA', 'CompanyNameTest', 'ContactNameTest', 'ContactTitleTest', 'AddressTest', 'CityTest', null, NULL, NULL, NULL, Null);
+
+--9) Update all ShipRegion to the value ‘EuroZone’ in the Orders table, where the ShipCountry is equal to France.  
+update [NORTHWND].[dbo].[Orders]
+set ShipRegion = 'EuroZone'
+where ShipCountry = 'France';
+select * from [NORTHWND].[dbo].[Orders] ----just to see results
+
+--10) Delete all orders from OrderDetails that have quantity of 1. 
+Delete from [NORTHWND].[dbo].[Order Details]
+where Quantity = 1;
+
+--11) Find the CustomerID that placed order 10290 (orders table).
+select CustomerID from [NORTHWND].[dbo].[Orders]
+where OrderID = '10290';
+
+--12) Join the orders table to the customers table. --will do an inner join, as what type of join is not specified (rows/columns in table that do not match up with the other table will not be shown)
+SELECT Orders.OrderID, Customers.CustomerID
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+--13) Get employees’ firstname for all employees who report to no one.
+select [FirstName] from [NORTHWND].[dbo].[Employees]
+where [ReportsTo] is null
+
+--14) Get employees’ firstname for all employees who report to Andrew.
+select [FirstName] from [NORTHWND].[dbo].[Employees]
+where [ReportsTo] = 2
