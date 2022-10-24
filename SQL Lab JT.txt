@@ -4,7 +4,7 @@ select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Regio
 --2) Get Distict Countries from the Customers table
 select Country from [NORTHWND].[dbo].[Customers];
 
---3) Get all the rows from the table Customers where the Customerís ID starts with ìBLî.
+--3) Get all the rows from the table Customers where the Customer‚Äôs ID starts with ‚ÄúBL‚Äù.
 select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax from [NORTHWND].[dbo].[Customers]
 where CustomerID LIKE 'BL%';
 
@@ -33,6 +33,7 @@ where PostalCode = '1010' or
 PostalCode ='3012'or
 PostalCode ='12209' or
 PostalCode ='05023';
+--5. SELECT * FROM Customers WHERE PostalCode = '1010' or PostalCode = '3012' or PostalCode = '12209' or PostalCode = '05023'
 
 --6) Get all orders where the ShipRegion is not equal to NULL.
 select[ShipRegion] from [NORTHWND].[dbo].[Orders]
@@ -46,7 +47,7 @@ order by [Country] asc, [City];
 Insert into [NORTHWND].[dbo].[Customers]
 values('QLGEA', 'CompanyNameTest', 'ContactNameTest', 'ContactTitleTest', 'AddressTest', 'CityTest', null, NULL, NULL, NULL, Null);
 
---9) Update all ShipRegion to the value ëEuroZoneí in the Orders table, where the ShipCountry is equal to France.  
+--9) Update all ShipRegion to the value ‚ÄòEuroZone‚Äô in the Orders table, where the ShipCountry is equal to France.  
 update [NORTHWND].[dbo].[Orders]
 set ShipRegion = 'EuroZone'
 where ShipCountry = 'France';
@@ -65,10 +66,10 @@ SELECT Orders.OrderID, Customers.CustomerID
 FROM Orders
 INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
 
---13) Get employeesí firstname for all employees who report to no one.
+--13) Get employees‚Äô firstname for all employees who report to no one.
 select [FirstName] from [NORTHWND].[dbo].[Employees]
 where [ReportsTo] is null
 
---14) Get employeesí firstname for all employees who report to Andrew.
+--14) Get employees‚Äô firstname for all employees who report to Andrew.
 select [FirstName] from [NORTHWND].[dbo].[Employees]
 where [ReportsTo] = 2
