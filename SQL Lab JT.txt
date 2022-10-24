@@ -1,3 +1,4 @@
+--(add distinct to prevent repeats)
 --1) select all rows of the "Customers" table
 select CustomerID,CompanyName, ContactName, ContactTitle, [Address], City, Region, PostalCode, Country, Phone, Fax from [NORTHWND].[dbo].[Customers];
 
@@ -33,15 +34,15 @@ where PostalCode = '1010' or
 PostalCode ='3012'or
 PostalCode ='12209' or
 PostalCode ='05023';
---5. SELECT * FROM Customers WHERE PostalCode = '1010' or PostalCode = '3012' or PostalCode = '12209' or PostalCode = '05023'
---try IN?
+--SELECT * FROM Customers WHERE PostalCode = '1010' or PostalCode = '3012' or PostalCode = '12209' or PostalCode = '05023'
+--select * from Customers Where PostalCode IN ('1010','3012','12209', '05023');
 
---6) Get all orders where the ShipRegion is not equal to NULL.
+--6) Get all orders where the ShipRegion is not equal to NULL. 
 select[ShipRegion] from [NORTHWND].[dbo].[Orders]
 where [ShipRegion] is not null;
 
 --7)Get all customers ordered by the country, then by the city.
-select [CustomerID], [Country], [City] from [NORTHWND].[dbo].[Customers]
+select [CustomerID], [Country], distinct [City] from [NORTHWND].[dbo].[Customers] 
 order by [Country] asc, [City];
 
 --8) Add a new customer to the customers table. You can use whatever values.
