@@ -34,6 +34,7 @@ PostalCode ='3012'or
 PostalCode ='12209' or
 PostalCode ='05023';
 --5. SELECT * FROM Customers WHERE PostalCode = '1010' or PostalCode = '3012' or PostalCode = '12209' or PostalCode = '05023'
+--try IN?
 
 --6) Get all orders where the ShipRegion is not equal to NULL.
 select[ShipRegion] from [NORTHWND].[dbo].[Orders]
